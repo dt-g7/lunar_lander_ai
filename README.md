@@ -7,6 +7,7 @@ The repository includes scripts to:
 - Load and run a pre-trained model for demonstration.
 - Run a simple baseline using random actions.
 
+![Image](https://github.com/user-attachments/assets/746e8cad-56fc-4614-ad75-9db328814d07)
 ---
 
 ## Repository Structure
