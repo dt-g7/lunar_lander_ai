@@ -1,125 +1,122 @@
-# Lunar Lander AI
+# Lunar Lander Reinforcement Learning Environment
 
-This repository contains a reinforcement learning project that uses the [PPO](https://arxiv.org/abs/1707.06347) (Proximal Policy Optimization) algorithm from [Stable Baselines3](https://stable-baselines3.readthedocs.io/) to train an agent for the [LunarLander-v2](https://gymnasium.farama.org/environments/box2d/lunar_lander/) environment provided by [Gymnasium](https://gymnasium.farama.org/).
+A custom implementation of the Lunar Lander environment for reinforcement learning, built with Pygame and Box2D physics engine. This environment provides a realistic simulation of a lunar lander that must learn to safely land on a target platform.
 
-The repository includes scripts to:
-- Train the agent and periodically save the model.
-- Load and run a pre-trained model for demonstration.
-- Run a simple baseline using random actions.
+## Features
 
-![Image](https://github.com/user-attachments/assets/746e8cad-56fc-4614-ad75-9db328814d07)
----
+- Realistic physics simulation using Box2D
+- Customizable terrain generation with a designated landing zone
+- Visual rendering using Pygame
+- Compatible with Stable-Baselines3 reinforcement learning framework
+- Configurable reward structure
+- Time-limited episodes (15 seconds)
+- Detailed state observations and continuous action space
 
-## Repository Structure
+## Requirements
 
-lunar_lander_ai/
+- Python 3.11 (Make sure its 3.11 and not 3.12)
+- Pygame
+- Box2D
+- NumPy
+- Stable-Baselines3
+- Gymnasium
 
-├── models/
+## Installation
 
-│   └── PPO/                # Directory where trained PPO models are saved.
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd LunarLander
+```
 
-├── logs/                   # Directory for tensorboard and training logs.
+2. Install the required packages:
+```bash
+pip install -r requirements.txt
+```
 
-├── main.py                 # Script for training the PPO agent.
+## Project Structure
 
-├── load.py                 # Script to load a pre-trained model and run it.
+- `Lunar_Lander_custom_env.py`: Main environment class implementing the Gymnasium interface
+- `physics.py`: Box2D physics simulation and world management
+- `rendering.py`: Pygame-based visualization
+- `custom_run.py`: Training script using Stable-Baselines3 PPO
+- `requirements.txt`: Project dependencies
 
-└── ORIGINAL.py             # Basic script that runs the environment with random actions.
+## Environment Details
 
----
+### Observation Space
+The environment provides 6-dimensional observations:
+- `dx`: Horizontal distance from landing zone center
+- `dy`: Vertical distance from landing zone center
+- `x_velocity`: Horizontal velocity
+- `y_velocity`: Vertical velocity
+- `angle`: Current rotation angle
+- `angular_velocity`: Current rotation speed
 
-## Prerequisites
+### Action Space
+Continuous 2-dimensional action space:
+- `thrust`: Main engine thrust (0 to 50)
+- `torque`: Rotation control (-20 to 20)
 
-- **Python 3.7+** (recommended Python 3.8 or higher)
-- **Gymnasium**  
-  Install via pip:
-  ```bash
-  pip install gymnasium
-- **Stable Baselines3**  
-  Install via pip:
-  ```bash
-  pip install gymnasium
-Other dependencies such as NumPy and PyTorch are installed automatically with stable-baselines3.
+### Reward Structure
+The reward function encourages:
+- Staying alive (+5 per step)
+- Moving toward landing zone center (-0.31 * distance)
+- Maintaining stable vertical velocity (-0.3 * |vertical_velocity|)
+- Successful landing (+400)
+- Penalties for crashes (-100)
 
----
+### Termination Conditions
+An episode ends when:
+- The lander successfully lands on the target platform
+- The lander crashes
+- The time limit (15 seconds) is reached
 
-## Usage
-Training the Agent (main.py)
-The main.py script sets up the LunarLander-v2 environment, initializes the PPO model, and trains the agent in iterations. 
-Key features include:
+## Training
 
-Directory Setup:
-Ensures that the directories for saving models (models/PPO) and logs (logs) exist.
-
-Environment Setup:
-Creates the LunarLander-v2 environment in "rgb_array" render mode.
-
-Model Training:
-Trains for a fixed number of timesteps per iteration (default: 10,000 timesteps per iteration) for 100 iterations. The model is saved after each iteration.
-
----
-
-### Running a Pre-trained Model (load.py)
-The load.py script demonstrates how to load a previously trained model and run it in real-time. Key points:
-
-Model Loading:
-It loads a model from models/PPO/900000.zip. (Make sure that this file exists or change the path to a saved model.)
-
-Interactive Environment:
-The environment is created in "human" render mode, enabling visual feedback.
-
-Continuous Execution:
-The script enters an infinite loop where the agent continuously predicts actions and steps through the environment.
-
-- **How to Run:**  
-  ```bash
-  python load.py
-
----
-
-### Random Agent Baseline (ORIGINAL.py)
-The ORIGINAL.py script is a simple example of interacting with the LunarLander-v2 environment by taking random actions. This can be used as a baseline to compare the performance of the trained agent.
-
-**How to Run:**  
-  ```bash
-  python ORIGINAL.py
-  ```
-The script:
-
-Initializes the environment with a fixed seed for reproducibility.
-Executes 1,000 steps using randomly sampled actions.
-Resets the environment if the episode ends (terminated or truncated).
-
----
-
-### Customization & Parameters
-
-TIMESTEPS (main.py):
-You can modify the constant TIMESTEPS to change how many timesteps the model learns per iteration.
-
-Training Iterations:
-The number of iterations (currently 100) can be adjusted based on the desired training duration.
-
-Model Save Frequency:
-The model is saved after each iteration. The file naming convention uses the product of TIMESTEPS and the iteration count. Adjust as needed.
-
-Environment Choice:
-The scripts use the "LunarLander-v2" environment. For continuous control, you might consider using "LunarLanderContinuous-v2" (especially in load.py where a comment hints at this).
-
----
-
-## Notes
-
-Logging:
-Training logs are saved in the `logs` folder. You can use TensorBoard to monitor training progress:
+To train a model using PPO:
 
 ```bash
-tensorboard --logdir logs
+python custom_run.py
 ```
-Model Files:
-Ensure that the directory models/PPO is writable. The saved models are in .zip format.
 
-License:
-This project isn’t licensed. Feel free to use it, but if you plan to distribute or modify it, reach out to me first if you want!
+The training script:
+- Creates a PPO model with optimized hyperparameters
+- Saves the best model to the `custom_lunar` directory
+- Evaluates the model every 10,000 timesteps
+- Trains for 500,000 timesteps
 
+### PPO Hyperparameters
+- Learning rate: 3e-4
+- Steps per update: 1024
+- Batch size: 128
+- Number of epochs: 5
+- Gamma: 0.999
+- GAE Lambda: 0.98
+- Network architecture: Two hidden layers of 128 units each
 
+## Physics Parameters
+
+The environment uses the following physics settings:
+- Gravity: -3.0 m/s²
+- Thrust scaling: 12.0
+- Torque scaling: 0.3
+- Lander properties:
+  - Density: 0.5
+  - Linear damping: 0.2
+  - Angular damping: 2.0
+  - No bounce (restitution: 0.0)
+
+## Rendering
+
+The environment supports two render modes:
+- `human`: Visual display using Pygame
+- `none`: No visual output (faster training)
+
+## Contributing
+
+Feel free to submit issues and enhancement requests!
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details. 
