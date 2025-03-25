@@ -116,10 +116,6 @@ The environment supports two render modes:
 - `human`: Visual display using Pygame
 - `none`: No visual output (faster training)
 
-## Contributing
-
-Feel free to submit issues and enhancement requests!
-
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details. 
+This project is not licensed, but message me if you intent to use it for something!
