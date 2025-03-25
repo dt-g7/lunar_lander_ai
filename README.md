@@ -42,14 +42,43 @@ pip install -r requirements.txt
 
 ### Project Structure
 
-- `Lunar_Lander_custom_env.py`: Main environment class implementing the Gymnasium interface
-- `physics.py`: Box2D physics simulation and world management
-- `rendering.py`: Pygame-based visualization
-- `custom_run.py`: Training script using Stable-Baselines3 PPO
-- `requirements.txt`: Project dependencies
+- **`Lunar_Lander_custom_env.py`**: Main environment class implementing the Gymnasium interface  
+  *(located in `src/lunar_lander`)*
+
+- **`physics.py`**: Box2D physics simulation and world management  
+  *(located in `src/lunar_lander`)*
+
+- **`rendering.py`**: Pygame-based visualization  
+  *(located in `src/lunar_lander`)*
+
+- **`custom_run.py`**: Training script using Stable-Baselines3 PPO  
+  *(located in `src/lunar_lander`)*
+
+- **`requirements.txt`**: Project dependencies
+
+---
+
+Additional files and folders:
+
+- **`custom_lunar/`**: Contains saved best model for custom env(e.g., `best_model1.zip`) and evaluation outputs (e.g., `evaluations.npz`)
+- **`logs/`**: Training logs (e.g., `PPO_0`), needed if you want tensorboard graphs
+- **`models/`**: Additional model files 
+- **Utility Scripts**:  
+  - `load.py`
+  - `load_model_not_trained.py`
+  - `main.py` *(optional entry-point for interactive testing)*
+- **Configuration & Documentation**:  
+  - `.gitignore`
+  - `README.md`
+  - `setup.py`
+- **IDE Folder**:  
+  - `.idea/`
 
 ### How to load/run models
-In any load file you will see:
+
+Start by making your way into `load.py`
+
+Within any load file you will see:
 ```bash
 model_path = f"{models_dir}/880000.zip"
 ```
