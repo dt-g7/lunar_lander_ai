@@ -118,4 +118,4 @@ The environment supports two render modes:
 
 ## License
 
-This project is not licensed, but message me if you intent to use it for something!
+This project is not licensed, but message me if you intent to use it for something !
