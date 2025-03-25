@@ -1,7 +1,7 @@
 # Lunar Lander Reinforcement Learning Environment
+![Image](https://github.com/user-attachments/assets/9b690330-ccd3-431d-9c57-53c3dce18527)
 
 A custom implementation of the Lunar Lander environment for reinforcement learning, built with Pygame and Box2D physics engine. This environment provides a realistic simulation of a lunar lander that must learn to safely land on a target platform.
-![Image](https://github.com/user-attachments/assets/9b690330-ccd3-431d-9c57-53c3dce18527)
 
 ## Features
 
