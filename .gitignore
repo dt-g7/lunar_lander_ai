@@ -32,7 +32,6 @@ ENV/
 *.swo
 
 # Project specific
-custom_lunar/
 *.log
 *.pkl
 *.h5

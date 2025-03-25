@@ -4,7 +4,7 @@ from Lunar_Lander_custom_env import LunarLanderEnv
 
 # best model folder maybe I will change the name later
 models_dir = "../../custom_lunar"
-model_path = os.path.join(models_dir, "best_model.zip")
+model_path = os.path.join(models_dir, "best_model1.zip")
 
 env = LunarLanderEnv(render_mode="human")
 
