@@ -5,6 +5,9 @@
 </p>
 A custom implementation of the Lunar Lander environment for reinforcement learning, built with Pygame and Box2D physics engine. This environment provides a realistic simulation of a lunar lander that must learn to safely land on a target platform.
 
+#### If you haven't played before, I suggest you go download the game I coded from my other repository here to play it and get a feel for it!
+https://github.com/dt-g7/lunar_lander_game
+
 ## Features
 
 - Realistic physics simulation using Box2D
