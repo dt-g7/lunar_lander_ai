@@ -37,7 +37,7 @@ cd LunarLander
 pip install -r requirements.txt
 ```
 
-## Project Structure
+### Project Structure
 
 - `Lunar_Lander_custom_env.py`: Main environment class implementing the Gymnasium interface
 - `physics.py`: Box2D physics simulation and world management
@@ -45,7 +45,27 @@ pip install -r requirements.txt
 - `custom_run.py`: Training script using Stable-Baselines3 PPO
 - `requirements.txt`: Project dependencies
 
-## Environment Details
+### How to load/run models
+In any load file you will see:
+```bash
+model_path = f"{models_dir}/880000.zip"
+```
+Which specifies which model iteration you will run
+
+In load_model_not_trained.py you will load an untrained model.
+
+
+### Here is an example of a model BEFORE training:
+![Image](https://github.com/user-attachments/assets/bdafc1e0-83de-4418-8dbf-513b9cf976c3)
+
+
+### Here is an example of a model AFTER training (880000th iteration):
+![Image](https://github.com/user-attachments/assets/7278b44f-b1de-41e9-827e-463d802f6941)
+
+### For our own custion environment, this is before:
+![Image](https://github.com/user-attachments/assets/3a7eaec6-00a7-40d7-9700-41186b1edea3)
+### And this is after:
+![Image](https://github.com/user-attachments/assets/b74e0882-c5b1-4cf2-bca8-66333884e375)
 
 ### Observation Space
 The environment provides 6-dimensional observations:
@@ -69,6 +89,8 @@ The reward function encourages:
 - Successful landing (+400)
 - Penalties for crashes (-100)
 
+^ These parameters took a long time to fine tune, but feel free to mess with them to see if you can train a better model!
+
 ### Termination Conditions
 An episode ends when:
 - The lander successfully lands on the target platform
@@ -88,6 +110,26 @@ The training script:
 - Saves the best model to the `custom_lunar` directory
 - Evaluates the model every 10,000 timesteps
 - Trains for 500,000 timesteps
+
+### How will I know if my model is learning?
+While training your model in main.py or custom_run.py SB3 will have the console will print out a few stats for you:
+![image](https://github.com/user-attachments/assets/f7611d2e-e44d-4d6c-b23d-48883f64a0a5)
+
+You can also pip install tensorboard and run the command
+```bash
+tensorboard --logdir logs
+```
+To show some useful graphs!
+
+![image](https://github.com/user-attachments/assets/03a8dcc9-60c2-4030-9093-7d12c3c7ba1a)
+
+
+Here we see that over time each episode length becomes shorter as our model learns (ep_len_mean).
+
+#### We also see (ep_rew_mean) go up over time, peaking at about our 900k iteration:
+![image](https://github.com/user-attachments/assets/f832f0cf-90a7-4743-a40b-f4cfb02860a1)
+
+(This is how I knew to load the 880,000 model in our directory)
 
 ### PPO Hyperparameters
 - Learning rate: 3e-4
