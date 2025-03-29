@@ -1,4 +1,4 @@
-# Lunar Lander Reinforcement Learning Environment
+# 🛸Lunar Lander Reinforcement Learning Environment
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/9b690330-ccd3-431d-9c57-53c3dce18527" alt="Image" />
@@ -8,7 +8,7 @@ A custom implementation of the Lunar Lander environment for reinforcement learni
 #### If you haven't played before, I suggest you go download the game I coded from my other repository here to play it and get a feel for it!
 https://github.com/dt-g7/lunar_lander_game
 
-## Features
+## 🚀Features
 
 - Realistic physics simulation using Box2D
 - Customizable terrain generation with a designated landing zone
@@ -18,7 +18,7 @@ https://github.com/dt-g7/lunar_lander_game
 - Time-limited episodes (15 seconds)
 - Detailed state observations and continuous action space
 
-## Requirements
+## 📋Requirements
 
 - Python 3.11 (Make sure its 3.11 and not 3.12)
 - Pygame
@@ -27,7 +27,7 @@ https://github.com/dt-g7/lunar_lander_game
 - Stable-Baselines3
 - Gymnasium
 
-## Installation
+## 🔧Installation
 
 1. Clone the repository:
 ```bash
@@ -40,7 +40,7 @@ cd LunarLander
 pip install -r requirements.txt
 ```
 
-### Project Structure
+### 📁Project Structure
 
 - **`Lunar_Lander_custom_env.py`**: Main environment class implementing the Gymnasium interface  
   *(located in `src/lunar_lander`)*
@@ -78,7 +78,7 @@ Additional files and folders:
 ![Image](https://github.com/user-attachments/assets/1105e419-5c2a-4217-b28b-4de606862896)
 
 
-### How to load/run models
+### How to load/run models 🤖
 
 Start by making your way into `load.py`
 
@@ -103,7 +103,7 @@ In load_model_not_trained.py you will load an untrained model.
 ### And this is after:
 ![Image](https://github.com/user-attachments/assets/b74e0882-c5b1-4cf2-bca8-66333884e375)
 
-### Observation Space
+### Observation Space 🔭
 The environment provides 6-dimensional observations:
 - `dx`: Horizontal distance from landing zone center
 - `dy`: Vertical distance from landing zone center
@@ -112,12 +112,12 @@ The environment provides 6-dimensional observations:
 - `angle`: Current rotation angle
 - `angular_velocity`: Current rotation speed
 
-### Action Space
+### Action Space 💥
 Continuous 2-dimensional action space:
 - `thrust`: Main engine thrust (0 to 50)
 - `torque`: Rotation control (-20 to 20)
 
-### Reward Structure
+### Reward Structure 🏆 
 The reward function encourages:
 - Staying alive (+5 per step)
 - Moving toward landing zone center (-0.31 * distance)
@@ -127,13 +127,13 @@ The reward function encourages:
 
 ^ These parameters took a long time to fine tune, but feel free to mess with them to see if you can train a better model!
 
-### Termination Conditions
+### Termination Conditions 🔚
 An episode ends when:
 - The lander successfully lands on the target platform
 - The lander crashes
 - The time limit (15 seconds) is reached
 
-## Training
+## Training 🏋🏻‍♀️
 
 To train a model using PPO:
 
@@ -147,7 +147,7 @@ The training script:
 - Evaluates the model every 10,000 timesteps
 - Trains for 500,000 timesteps
 
-### How will I know if my model is learning?
+### How will I know if my model is learning? 🧠
 While training your model in main.py or custom_run.py SB3 will have the console will print out a few stats for you:
 ![image](https://github.com/user-attachments/assets/f7611d2e-e44d-4d6c-b23d-48883f64a0a5)
 
@@ -167,7 +167,7 @@ Here we see that over time each episode length becomes shorter as our model lear
 
 (This is how I knew to load the 880,000 model in our directory)
 
-### PPO Hyperparameters
+### PPO Hyperparameters 🤖🎨
 - Learning rate: 3e-4
 - Steps per update: 1024
 - Batch size: 128
@@ -175,8 +175,8 @@ Here we see that over time each episode length becomes shorter as our model lear
 - Gamma: 0.999
 - GAE Lambda: 0.98
 - Network architecture: Two hidden layers of 128 units each
-
-## Physics Parameters
+ 
+## Physics Parameters 🌌
 
 The environment uses the following physics settings:
 - Gravity: -3.0 m/s²
@@ -188,12 +188,12 @@ The environment uses the following physics settings:
   - Angular damping: 2.0
   - No bounce (restitution: 0.0)
 
-## Rendering
+## Rendering 🖼️
 
 The environment supports two render modes:
 - `human`: Visual display using Pygame
 - `none`: No visual output (faster training)
 
-## License
+## License ⚖️
 
 This project is not licensed, but message me if you intent to use it for something !
