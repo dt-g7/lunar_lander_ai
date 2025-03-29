@@ -74,6 +74,10 @@ Additional files and folders:
 - **IDE Folder**:  
   - `.idea/`
 
+### Visual Workflow Diagram (click to zoom in)
+![Image](https://github.com/user-attachments/assets/1105e419-5c2a-4217-b28b-4de606862896)
+
+
 ### How to load/run models
 
 Start by making your way into `load.py`
